@@ -1,15 +1,16 @@
 "use strict";
 
-// ES 6
+// Typescript.
+
+let stdout;
+let fg_color = 'white';
+let bg_color = 'rgba(0, 0, 0, 0,)';
 
 class Command {
-    constructor(exec_name, callback, description = '') {
-        this.exec_name = exec_name;
-        this.callback = callback;
-        this.description = description;
-    }
-    run() {
-        this.callback();
-        print_prompt();
-    }
+    
 }
+
+class Shell {
+
+}
+    
