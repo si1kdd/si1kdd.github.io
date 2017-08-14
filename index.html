@@ -5,10 +5,12 @@
                 <meta name="viewport" content="width=device-width" />
                 <title> Dav's Sullivan Profiles </title>
 
-                <!--small favicon-->
+                <!--Small favicon-->
                 <link rel="shortcut icon" type='image/x-icon' href="./image/favicon.ico"/>
-
-                <!--just css and js-->
+                
+                <!-- using babel -->
+                <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+                <!--Just css and js-->
                 <link rel="stylesheet" href="css/main.css">
                 <script type="text/javascript" src="js/main.js"></script>
         </head>
@@ -17,8 +19,10 @@
                         <header>
                                 Dav's Sullivan Profiles
                         </header>
+
                         <article id="terminal">
-                                <span id="stdout"> <div contenEditable="true" id="stdin"> whoami </div>  </span>
+                                <span id="stdout"></span>
+                                <div contenteditable="true" id="stdin" >Press Enter to start ... </div>
                         </article>
                 </section>
         </body>
