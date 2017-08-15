@@ -1,5 +1,6 @@
-# My personal introduction website.
-- - -
+# Introduce myself with a tiny terminal website.
 
-- TODO:
-  - Links, RWD UI, Resume/CV.
+- [Demo](https://si1kdd.github.io)
+
+- TODO list:
+  	- Links, RWD UI, Resume/CV.
