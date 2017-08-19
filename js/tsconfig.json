@@ -3,7 +3,9 @@
     "target": "es6",
     "module": "commonjs",
     "strict": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "allowJs": true,
+    "strictNullChecks": false
   },
   "files": [
         "main.ts"
