@@ -8,9 +8,9 @@ let bg_color: string = 'rgba(0, 0, 0, 0)';
 
 class Command {
     exec_name: string;
-    descrption: string;
     callback: any;
-    constructor(exec_name: string, callback: any, descrption = '') {
+    descrption: string;
+    constructor(exec_name: string, callback: any, descrption: string = '') {
         this.exec_name = exec_name;
         this.callback = callback;
         this.descrption = descrption;
@@ -31,8 +31,7 @@ function print_out(stream: any, str: string, fg: string = fg_color, bg: string =
 
 function print_ln(stream: any, str: string, fg: string = fg_color, bg: string = bg_color) {
     let splited_str = str.split('\n');
-    let sp: any;
-    for (sp of splited_str) {
+    for (let sp of splited_str) {
         let node = document.createElement('pre');
         node.style.color = fg;
         node.style.backgroundColor = bg;
@@ -61,23 +60,42 @@ function print_url(stream: any, href : string, fg = fg_color, bg = bg_color) {
     node.style.backgroundColor = bg;
     node.textContent = href;
     node.target = '_self';
+    node.setAttribute('href', href);
     stream.appendChild(node);
 }
 
 function cmd_whoami() {
-    print_ln(stdout, "Name:\t\tDav Sullivan, aka si1kdd");
-    print_ln(stdout, 'College:\t\tNational Chiao Tung University');
-
+    print_out(stdout, "Name: ", 'white');
+    print_out(stdout, '\t\tDav Sullivan, aka ');
+    print_out(stdout, 'si1kdd', 'red');
     print_ln(stdout, '')
+
+    print_out(stdout, 'College: ', 'white');
+    print_out(stdout, '\tNational Chiao Tung University');
+    print_ln(stdout, '');
+
+    print_out(stdout, 'Introduction:', 'white');
+    print_out(stdout, '\tTo be continued ... ', 'black');
+    print_ln(stdout, '');
 }
 
 function cmd_repos() {
     print_out(stdout, 'My Open Source Repositories: ', 'yellow');
+    
     print_out(stdout, '\nGithub: ', 'red');
+    print_out(stdout, '\t');
     print_url(stdout, "https://github.com/si1kdd", 'white');
 
     print_out(stdout, '\nBitbucket: ', 'blue');
+    print_out(stdout, '\t');
     print_url(stdout, "https://bitbucket.org/si1kdd", 'white');
+    print_ln(stdout, '');
+}
+
+function cmd_blog() {
+    print_out(stdout, 'Blog: ', 'grey');
+    print_out(stdout, '\t');
+    print_url(stdout, 'https://si1kdd.gitlab.io');
     print_ln(stdout, '');
 }
 
@@ -101,7 +119,7 @@ function select_last(editable_element: any) {
 class Shell {
     bin: any[];
     history: any[];
-    curr_line = 0;
+    curr_line: number;
 
     constructor() {
         this.bin = [];
@@ -156,11 +174,13 @@ class Shell {
             print_prompt();
             return;
         }
+
+        // supported commands
         let founded = false;
-        for (let cmd of this.bin) {
-            if (cmd.exec_name === exec_name) {
+        for (let cmds of this.bin) {
+            if (cmds.exec_name === exec_name) {
                 founded = true;
-                cmd.run();
+                cmds.run();
                 break;
             }
         }
@@ -177,10 +197,11 @@ window.onload = () => {
     let stdin = document.getElementById('stdin');
 
     let fakesh = new Shell();
-    fakesh.init(new Command('icon', print_si1kdd, 'Print my icon.'));
-    fakesh.init(new Command('whoami', cmd_whoami, 'Display my personal profile.'));
-    fakesh.init(new Command('repos', cmd_repos, 'Display my open source repositories.'));
-    fakesh.init(new Command('help', cmd_help, 'Display all commands supported.'));
+    fakesh.init(new Command('icon',     print_si1kdd,   'Print my icon.'));
+    fakesh.init(new Command('whoami',   cmd_whoami,     'Display my personal profile.'));
+    fakesh.init(new Command('repos',    cmd_repos,      'Display my open source repositories.'));
+    fakesh.init(new Command('help',     cmd_help,       'Display all commands supported.'));
+    fakesh.init(new Command('blog',     cmd_blog,       'Display my blog url (write in chinese now) :).'));
 
     let term = document.getElementById('terminal');
     term.onclick = (e) => {
@@ -189,13 +210,14 @@ window.onload = () => {
 
     stdin.onkeydown = (e) => {
         if (e.keyCode === 13) {
+            let content = stdin.textContent;
+
             e.preventDefault();
+            fakesh.appen_history(content);
+            print_ln(stdout, ' ' + content);
+            fakesh.exec(content);
 
-            fakesh.appen_history(stdin.textContent);
-            print_ln(stdout, stdin.textContent);
-            fakesh.exec(stdin.textContent);
-
-            stdin.textContent = "";
+            stdin.textContent = '';
         } else if (e.keyCode === 38) {
             // up
             e.preventDefault();

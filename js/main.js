@@ -25,8 +25,7 @@ function print_out(stream, str, fg = fg_color, bg = bg_color) {
 }
 function print_ln(stream, str, fg = fg_color, bg = bg_color) {
     let splited_str = str.split('\n');
-    let sp;
-    for (sp of splited_str) {
+    for (let sp of splited_str) {
         let node = document.createElement('pre');
         node.style.color = fg;
         node.style.backgroundColor = bg;
@@ -52,19 +51,35 @@ function print_url(stream, href, fg = fg_color, bg = bg_color) {
     node.style.backgroundColor = bg;
     node.textContent = href;
     node.target = '_self';
+    node.setAttribute('href', href);
     stream.appendChild(node);
 }
 function cmd_whoami() {
-    print_ln(stdout, "Name:\t\tDav Sullivan, aka si1kdd");
-    print_ln(stdout, 'College:\t\tNational Chiao Tung University');
+    print_out(stdout, "Name: ", 'white');
+    print_out(stdout, '\t\tDav Sullivan, aka ');
+    print_out(stdout, 'si1kdd', 'red');
+    print_ln(stdout, '');
+    print_out(stdout, 'College: ', 'white');
+    print_out(stdout, '\tNational Chiao Tung University');
+    print_ln(stdout, '');
+    print_out(stdout, 'Introduction:', 'white');
+    print_out(stdout, '\tTo be continued ... ', 'black');
     print_ln(stdout, '');
 }
 function cmd_repos() {
     print_out(stdout, 'My Open Source Repositories: ', 'yellow');
     print_out(stdout, '\nGithub: ', 'red');
+    print_out(stdout, '\t');
     print_url(stdout, "https://github.com/si1kdd", 'white');
     print_out(stdout, '\nBitbucket: ', 'blue');
+    print_out(stdout, '\t');
     print_url(stdout, "https://bitbucket.org/si1kdd", 'white');
+    print_ln(stdout, '');
+}
+function cmd_blog() {
+    print_out(stdout, 'Blog: ', 'grey');
+    print_out(stdout, '\t');
+    print_url(stdout, 'https://si1kdd.gitlab.io');
     print_ln(stdout, '');
 }
 function cmd_help(shell) {
@@ -84,7 +99,6 @@ function select_last(editable_element) {
 }
 class Shell {
     constructor() {
-        this.curr_line = 0;
         this.bin = [];
         this.history = [];
         this.curr_line = 0;
@@ -133,11 +147,12 @@ class Shell {
             print_prompt();
             return;
         }
+        // supported commands
         let founded = false;
-        for (let cmd of this.bin) {
-            if (cmd.exec_name === exec_name) {
+        for (let cmds of this.bin) {
+            if (cmds.exec_name === exec_name) {
                 founded = true;
-                cmd.run();
+                cmds.run();
                 break;
             }
         }
@@ -155,17 +170,19 @@ window.onload = () => {
     fakesh.init(new Command('whoami', cmd_whoami, 'Display my personal profile.'));
     fakesh.init(new Command('repos', cmd_repos, 'Display my open source repositories.'));
     fakesh.init(new Command('help', cmd_help, 'Display all commands supported.'));
+    fakesh.init(new Command('blog', cmd_blog, 'Display my blog url (write in chinese now) :).'));
     let term = document.getElementById('terminal');
     term.onclick = (e) => {
         stdin.focus();
     };
     stdin.onkeydown = (e) => {
         if (e.keyCode === 13) {
+            let content = stdin.textContent;
             e.preventDefault();
-            fakesh.appen_history(stdin.textContent);
-            print_ln(stdout, stdin.textContent);
-            fakesh.exec(stdin.textContent);
-            stdin.textContent = "";
+            fakesh.appen_history(content);
+            print_ln(stdout, ' ' + content);
+            fakesh.exec(content);
+            stdin.textContent = '';
         }
         else if (e.keyCode === 38) {
             // up
