@@ -173,7 +173,9 @@ window.onload = () => {
     fakesh.init(new Command('blog', cmd_blog, 'Display my blog url (write in chinese now) :).'));
     let term = document.getElementById('terminal');
     term.onclick = (e) => {
-        stdin.focus();
+        stdin.focus({preventScroll:true});
+        let offtop = stdin.offsetTop;
+        stdin.scrollHeight = offtop + 100;
     };
     stdin.onkeydown = (e) => {
         if (e.keyCode === 13) {
@@ -183,6 +185,7 @@ window.onload = () => {
             print_ln(stdout, ' ' + content);
             fakesh.exec(content);
             stdin.textContent = '';
+            // stdin.focus({preventScroll:true});
         }
         else if (e.keyCode === 38) {
             // up
@@ -196,7 +199,10 @@ window.onload = () => {
             stdin.textContent = fakesh.next_cmds();
             select_last(stdin);
         }
+        let offtop = stdin.offsetTop;
+        stdin.scrollHeight = offtop + 100;
     };
-    stdin.focus();
+    // select_last(stdin);
+    stdin.focus({preventScroll:true});
     fakesh.exec('init');
 };

@@ -36,7 +36,8 @@ article{
   padding: 4px;
   color: white;
   word-wrap: break-word;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 pre{
@@ -60,6 +61,8 @@ p{
 
 div{
   display: inline;
+  user-select: text;
+  -webkit-user-select:text;
 }
 
 div:focus{

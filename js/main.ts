@@ -218,6 +218,7 @@ window.onload = () => {
             fakesh.exec(content);
 
             stdin.textContent = '';
+            stdin.focus();
         } else if (e.keyCode === 38) {
             // up
             e.preventDefault();
@@ -231,6 +232,7 @@ window.onload = () => {
             select_last(stdin);
         }
     }
+    select_last(stdin);
     stdin.focus();
     fakesh.exec('init');
 }
