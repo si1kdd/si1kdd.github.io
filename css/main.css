@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Anonymous Pro');
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: 'Inconsolata', monospace;
 }
 
-body{
+body {
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -15,7 +15,7 @@ body{
   align-items: center;
 }
 
-section{
+section {
   display: block;
   width: 640px;
   height: 480px;
@@ -24,14 +24,14 @@ section{
   box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-header{
+header {
   text-align: center;
   color: white;
   background-color: #424240;
   line-height: 24px;
 }
 
-article{
+article {
   height: 448px;
   padding: 4px;
   color: white;
@@ -40,16 +40,16 @@ article{
   overflow-x: auto;
 }
 
-pre{
+pre {
   display: inline;
   word-wrap: break-word;
 }
 
-pre:last-child{
+pre:last-child {
   display: inline-block;
 }
 
-p{
+p {
   display: inline;
   word-wrap: break-word;
   line-height: 1em;
@@ -59,21 +59,22 @@ p{
   animation-iteration-count: infinite;
 }
 
-div{
+div {
   display: inline;
   user-select: text;
-  -webkit-user-select:text;
+  -webkit-user-select: text;
 }
 
-div:focus{
+div:focus {
   outline: 0px solid transparent;
 }
 
-@keyframes blink{
-  0%{
+@keyframes blink {
+  0% {
     opacity: 1;
   }
-  70%{
+
+  70% {
     opacity: 0;
   }
 }

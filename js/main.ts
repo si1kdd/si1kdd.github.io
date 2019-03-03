@@ -1,7 +1,3 @@
-'use stricts';
-
-// Typescript. ES 6
-
 let stdout : any;
 let fg_color: string = 'white';
 let bg_color: string = 'rgba(0, 0, 0, 0)';
@@ -21,7 +17,8 @@ class Command {
     }
 };
 
-function print_out(stream: any, str: string, fg: string = fg_color, bg: string = bg_color) {
+function 
+print_out(stream: any, str: string, fg: string = fg_color, bg: string = bg_color) {
     let node = document.createElement('pre');
     node.style.color = fg;
     node.style.backgroundColor = bg;
@@ -29,7 +26,8 @@ function print_out(stream: any, str: string, fg: string = fg_color, bg: string =
     stream.appendChild(node);
 }
 
-function print_ln(stream: any, str: string, fg: string = fg_color, bg: string = bg_color) {
+function 
+print_ln(stream: any, str: string, fg: string = fg_color, bg: string = bg_color) {
     let splited_str = str.split('\n');
     for (let sp of splited_str) {
         let node = document.createElement('pre');
@@ -41,7 +39,8 @@ function print_ln(stream: any, str: string, fg: string = fg_color, bg: string = 
     }
 }
 
-function print_si1kdd() {
+function 
+print_si1kdd() {
     print_ln(stdout, 'Hello, I am \n\
         _ _ _       _     _         \n\
     ___(_) | | ____| | __| |        \n\
@@ -50,11 +49,13 @@ function print_si1kdd() {
    |___/_|_|_|\\_\\__,_|\\__,_|        \n');
 }
 
-function print_prompt() {
+function 
+print_prompt() {
     print_out(stdout, 'fakesh $ ', 'green');
 }
 
-function print_url(stream: any, href : string, fg = fg_color, bg = bg_color) {
+function 
+print_url(stream: any, href : string, fg = fg_color, bg = bg_color) {
     let node = document.createElement('a');
     node.style.color = fg;
     node.style.backgroundColor = bg;
@@ -64,50 +65,55 @@ function print_url(stream: any, href : string, fg = fg_color, bg = bg_color) {
     stream.appendChild(node);
 }
 
-function cmd_whoami() {
+function 
+cmd_whoami() {
     print_out(stdout, "Name: ", 'white');
-    print_out(stdout, '\t\tDav Sullivan, aka ');
-    print_out(stdout, 'si1kdd', 'red');
+    print_out(stdout, '\t\tDav(id) Sullivan, aka ');
+    print_out(stdout, 'si1kdd', 'red'); 
     print_ln(stdout, '')
 
     print_out(stdout, 'College: ', 'white');
     print_out(stdout, '\tNational Chiao Tung University');
     print_ln(stdout, '');
 
-    print_out(stdout, 'Introduction:', 'white');
-    print_out(stdout, '\tTo be continued ... ', 'black');
+    print_out(stdout, 'About Me:\t', 'white');
+    print_url(stdout, "https://si1kdd.gitlab.io/about", 'blue');
     print_ln(stdout, '');
 }
 
-function cmd_repos() {
+function 
+cmd_repos() {
     print_out(stdout, 'My Open Source Repositories: ', 'yellow');
-    
-    print_out(stdout, '\nGithub: ', 'red');
-    print_out(stdout, '\t');
+
+    print_out(stdout, '\nGithub: (For long term open source projects)', 'red');
+    print_out(stdout, '\t\n\t');
     print_url(stdout, "https://github.com/si1kdd", 'white');
 
-    print_out(stdout, '\nBitbucket: ', 'blue');
-    print_out(stdout, '\t');
+    print_out(stdout, '\nBitbucket: (Some college homeworks i stored)', 'blue');
+    print_out(stdout, '\t\n\t');
     print_url(stdout, "https://bitbucket.org/si1kdd", 'white');
     print_ln(stdout, '');
 }
 
-function cmd_blog() {
+function 
+cmd_blog() {
     print_out(stdout, 'Blog: ', 'grey');
     print_out(stdout, '\t');
     print_url(stdout, 'https://si1kdd.gitlab.io');
     print_ln(stdout, '');
 }
 
-function cmd_help(shell: any) {
-    print_ln(stdout, 'fake shell (v0.1) all commands:', 'red');
+function 
+cmd_help(shell: any) {
+    print_ln(stdout, 'fake shell (v0.11) all commands:', 'red');
     for (let i = 0; i < shell.bin.length; i++) {
         let cmds = shell.bin[i];
         print_ln(stdout, cmds.exec_name + '\t - ' + cmds.descrption, 'yellow');
     }
 }
 
-function select_last(editable_element: any) {
+function 
+select_last(editable_element: any) {
     let range = document.createRange();
     let select = window.getSelection();
     range.selectNodeContents(editable_element);
@@ -197,14 +203,13 @@ window.onload = () => {
     let stdin = document.getElementById('stdin');
 
     let fakesh = new Shell();
-    fakesh.init(new Command('icon',     print_si1kdd,   'Print my icon.'));
-    fakesh.init(new Command('whoami',   cmd_whoami,     'Display my personal profile.'));
-    fakesh.init(new Command('repos',    cmd_repos,      'Display my open source repositories.'));
-    fakesh.init(new Command('help',     cmd_help,       'Display all commands supported.'));
-    fakesh.init(new Command('blog',     cmd_blog,       'Display my blog url (write in chinese now) :).'));
+    fakesh.init(new Command('icon', print_si1kdd, 'Print my icon.'));
+    fakesh.init(new Command('whoami', cmd_whoami, 'Display my personal profile.'));
+    fakesh.init(new Command('repos', cmd_repos, 'Display my open source repositories.'));
+    fakesh.init(new Command('help', cmd_help, 'Display all commands supported.'));
+    fakesh.init(new Command('blog', cmd_blog, 'Display my blog url (write in chinese now) :).'));
 
-    let term = document.getElementById('terminal');
-    term.onclick = (e) => {
+    document.getElementById('terminal').onclick = (e) => {
         stdin.focus();
     }
 
