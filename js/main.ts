@@ -77,7 +77,7 @@ cmd_whoami() {
     print_ln(stdout, '');
 
     print_out(stdout, 'About Me:\t', 'white');
-    print_url(stdout, "https://si1kdd.gitlab.io/about", 'blue');
+    print_url(stdout, "https://si1kdd.bitbucket.io/zh", 'blue');
     print_ln(stdout, '');
 }
 
@@ -99,7 +99,7 @@ function
 cmd_blog() {
     print_out(stdout, 'Blog: ', 'grey');
     print_out(stdout, '\t');
-    print_url(stdout, 'https://si1kdd.gitlab.io');
+    print_url(stdout, 'https://si1kdd.bitbucket.io/');
     print_ln(stdout, '');
 }
 
