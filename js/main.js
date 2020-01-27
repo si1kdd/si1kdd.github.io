@@ -61,7 +61,7 @@ function cmd_whoami() {
     print_out(stdout, '\tNational Chiao Tung University');
     print_ln(stdout, '');
     print_out(stdout, 'About Me:\t', 'white');
-    print_url(stdout, "https://si1kdd.bitbucket.io/zh", 'blue');
+    print_url(stdout, "https://si1kdd.bitbucket.io/about", 'blue');
     print_ln(stdout, '');
 }
 function cmd_repos() {
