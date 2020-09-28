@@ -17,7 +17,7 @@ class Command {
     }
 };
 
-function 
+function
 print_out(stream: any, str: string, fg: string = fg_color, bg: string = bg_color) {
     let node = document.createElement('pre');
     node.style.color = fg;
@@ -26,7 +26,7 @@ print_out(stream: any, str: string, fg: string = fg_color, bg: string = bg_color
     stream.appendChild(node);
 }
 
-function 
+function
 print_ln(stream: any, str: string, fg: string = fg_color, bg: string = bg_color) {
     let splited_str = str.split('\n');
     for (let sp of splited_str) {
@@ -39,7 +39,7 @@ print_ln(stream: any, str: string, fg: string = fg_color, bg: string = bg_color)
     }
 }
 
-function 
+function
 print_si1kdd() {
     print_ln(stdout, 'Hello, I am \n\
         _ _ _       _     _         \n\
@@ -49,12 +49,12 @@ print_si1kdd() {
    |___/_|_|_|\\_\\__,_|\\__,_|        \n');
 }
 
-function 
+function
 print_prompt() {
     print_out(stdout, 'fakesh $ ', 'green');
 }
 
-function 
+function
 print_url(stream: any, href : string, fg = fg_color, bg = bg_color) {
     let node = document.createElement('a');
     node.style.color = fg;
@@ -65,11 +65,11 @@ print_url(stream: any, href : string, fg = fg_color, bg = bg_color) {
     stream.appendChild(node);
 }
 
-function 
+function
 cmd_whoami() {
     print_out(stdout, "Name: ", 'white');
     print_out(stdout, '\t\tDav(id) Sullivan, aka ');
-    print_out(stdout, 'si1kdd', 'red'); 
+    print_out(stdout, 'si1kdd', 'red');
     print_ln(stdout, '')
 
     print_out(stdout, 'College: ', 'white');
@@ -81,7 +81,7 @@ cmd_whoami() {
     print_ln(stdout, '');
 }
 
-function 
+function
 cmd_repos() {
     print_out(stdout, 'My Open Source Repositories: ', 'yellow');
 
@@ -95,7 +95,7 @@ cmd_repos() {
     print_ln(stdout, '');
 }
 
-function 
+function
 cmd_blog() {
     print_out(stdout, 'Blog: ', 'grey');
     print_out(stdout, '\t');
@@ -103,7 +103,7 @@ cmd_blog() {
     print_ln(stdout, '');
 }
 
-function 
+function
 cmd_help(shell: any) {
     print_ln(stdout, 'fake shell (v0.11) all commands:', 'red');
     for (let i = 0; i < shell.bin.length; i++) {
@@ -112,7 +112,7 @@ cmd_help(shell: any) {
     }
 }
 
-function 
+function
 select_last(editable_element: any) {
     let range = document.createRange();
     let select = window.getSelection();
